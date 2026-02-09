@@ -13,16 +13,17 @@ This repository is mainly used for:
 ```text
 DEVOPS2026/
 │
-├── 20260112/              # Daily/weekly DevOps work
-├── 20260119/              # Practice & changes
-├── 20260128/              # Experiments
-├── 20260202/
-│   └── src/               # Source code
-├── 20260204/              # Task work
-├── 20260209/              # Latest updates
-│
-├── assignment(DevOps)1206.pdf   # DevOps assignment PDF
-├── assignment-8.zip             # Assignment archive
-├── reg.html                     # HTML file
-├── test.js                      # JavaScript testing file
+├── 20260112/       12-01-26     
+├── 20260119/       19-01-26     
+├── 20260128/       28-01-26
+├── 20260202/       02-02-26
+│   └── src/              
+├── 20260204/       04-02-26
+├── 20260209/       09-02-26
+
+
+├── assignment(DevOps)1206.pdf  
+├── assignment-8.zip            
+├── reg.html                    
+├── test.js                    
 └── README.md
