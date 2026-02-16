@@ -1,0 +1,58 @@
+name: CI - Full Stack Integration
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install Dependencies
+        run: cd backend && npm install
+
+      - name: Start Backend
+        run: cd backend && nohup npm start > server.log 2>&1 &
+
+      - name: Wait for Backend
+        run: |
+          for i in {1..20}; do
+            if curl -s http://localhost:5000/api/dashboard; then
+              echo "Backend is up!"
+              exit 0
+            fi
+            echo "Waiting for backend..."
+            sleep 1
+          done
+          echo "Backend failed to start"
+          exit 1
+
+      - name: Run Backend Integration Tests
+        run: cd backend && npm test
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install Dependencies
+        run: cd frontend && npm install
+
+      - name: Run Frontend Unit Tests
+        run: cd frontend && npm test
