@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base Styles ───────────────────────────────────────── */
+@layer base {
+    body {
+        @apply bg-dark-900 text-gray-100 font-sans antialiased;
+        background-image:
+            radial-gradient(ellipse at 20% 0%, rgba(124, 111, 255, 0.06) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 100%, rgba(52, 211, 153, 0.04) 0%, transparent 60%);
+        min-height: 100vh;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 100px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* ─── Component Utilities ───────────────────────────────── */
+@layer components {
+    .glass-card {
+        @apply bg-dark-700/50 backdrop-blur-xl border border-white/5 rounded-2xl shadow-lg transition-all duration-300 ease-out;
+    }
+
+    .glass-card-hover {
+        @apply glass-card hover:-translate-y-1 hover:shadow-2xl hover:border-white/10;
+    }
+
+    .btn-primary {
+        @apply px-5 py-2.5 bg-accent hover:bg-accent-dark text-white rounded-xl font-semibold text-sm transition-all duration-200 shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 active:scale-95;
+    }
+
+    .btn-danger {
+        @apply px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-xl font-medium text-sm transition-all duration-200 border border-red-500/20;
+    }
+
+    .btn-ghost {
+        @apply px-4 py-2 bg-white/5 hover:bg-white/10 text-gray-300 rounded-xl font-medium text-sm transition-all duration-200;
+    }
+
+    .input-field {
+        @apply w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-gray-100 placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all duration-200;
+    }
+
+    .select-field {
+        @apply w-full bg-dark-800 border border-white/10 rounded-xl px-4 py-2.5 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent/50 transition-all duration-200 appearance-none cursor-pointer;
+    }
+}
