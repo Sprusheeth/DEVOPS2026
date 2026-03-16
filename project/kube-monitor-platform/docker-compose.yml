@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - kube-monitor-network
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/kubemonitor
+      - JWT_SECRET=super_secret_kube_monitoring_key_2026
+    depends_on:
+      - mongodb
+    networks:
+      - kube-monitor-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5000
+    networks:
+      - kube-monitor-network
+    depends_on:
+      - backend
+
+volumes:
+  mongodb_data:
+
+networks:
+  kube-monitor-network:
+    driver: bridge
